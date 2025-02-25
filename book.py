@@ -63,13 +63,12 @@ class Record:
 class AddressBook(UserDict):
     def add_record(self, record_name:Record):
         self.name = record_name.name.value #і'мя у форматі класу Record
-        self.data[self.name] = [record_name] #номери телефонів у форматі класу Record
+        self.data[self.name] = record_name #номери телефонів у форматі класу Record
         return self.data
 
 
     def find(self,name:str) -> Record:  #ф-ія пошуку контакту за іменем
-        find_name = self.data.get(name)
-        return find_name[0]
+        return self.data.get(name)
     
 
     def delete(self,name_delete:str):   #ф-ія видалення контакту за іменем
@@ -80,8 +79,8 @@ class AddressBook(UserDict):
     def __str__(self): 
         u=[]
         for key in self.data:
-            y = self.data[key][0].name.value     #значення імені
-            z = self.data[key][0].phones         #список телефонів для цього імені
+            y = self.data[key].name.value     #значення імені
+            z = self.data[key].phones         #список телефонів для цього імені
             u.append(f"{y}: {"; ".join(n.value for n in z)};")  #додаємо ім'я та номер телефону у список для відображення
         return f"book:\n{"\n".join(k for k in u)}"  #додаємо \n для кращого відображення 
         
@@ -108,4 +107,4 @@ Ivan_record = Record("Ivan")
 Ivan_record.add_phone("1907328922")
 book.add_record(Ivan_record)
 book.delete("Ivan")
-print(book)
+print(book.__dict__)
