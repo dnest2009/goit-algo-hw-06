@@ -46,6 +46,8 @@ class Record:
             if flag:
                 self.add_phone(new)      #виклик ф-ії додавання нового номеру телефону
                 self.remove_phone(old)       #виклик ф-ії видалення старого номеру телефону
+            else:
+                raise ValueError("Номеру не існує")
  
 
     def find_phone(self,phone_number):
@@ -106,5 +108,7 @@ print(f"{john.name}: {found_phone}")  #Виведення: John: 5555555555
 Ivan_record = Record("Ivan")
 Ivan_record.add_phone("1907328922")
 book.add_record(Ivan_record)
-book.delete("Ivan")
-print(book.__dict__)
+# book.delete("Ivan")
+Ivan_record.edit_phone("1907328921", "0987654321")
+print(book)
+
